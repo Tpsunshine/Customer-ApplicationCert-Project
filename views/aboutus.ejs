@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>24X7</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <!-- For DataTables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+  <style>
+    .footer {
+       position: fixed;
+       left: 0;
+       bottom: 0;
+       width: 100%;
+       background-color: rgb(15, 16, 24);
+       color: white;
+       text-align: center;
+    }
+    #map{
+        height:500px;
+        width: 100%
+    }
+    #info{
+        float:right;
+        background-color: rgba(209, 48, 20, 0.884);
+        color: black;
+        height: 50px;
+        opacity: 60%;
+    }
+
+
+   
+
+    </style>
+</head>
+<body style="background-color: rgb(94, 93, 77);">
+
+
+
+<div id="myhomepage">
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #071c2b;">
+            <a class="navbar-brand" href="#">24x7 Live Customer news</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Homepage 
+                          <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contactus/">Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sports/">Sports</a>
+                    </li>
+                    <li class="nav-item  active">
+                        <a class="nav-link" href="#">About us</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+   
+        <div id="map" >
+
+        </div>
+        <div id="info">
+            <p>We are located in Hyderabad since 10years and still serving</p>
+        </div>
+
+
+        <div class="footer">
+            <p style="opacity:100%"><b>24X7 &#169;	all copyrights are registered</b></p>
+          </div>
+
+
+</div>
+<script>
+    function initMap(){
+        var location = {lat:17.5169,lng: 78.3428};
+        var map = new google.maps.Map(document.getElementById("map"),{
+            zoom: 4,
+            center: location
+        })
+        var marker = new google.maps.Marker({
+            position:location,
+            map:map
+        })
+
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3aXatOdECPufRVHTPvrbi45t2wrEI2dI&callback=initMap" type="text/javascript"></script>
+
+<!-- AIzaSyD3aXatOdECPufRVHTPvrbi45t2wrEI2dI -->
+</body>
+</html>

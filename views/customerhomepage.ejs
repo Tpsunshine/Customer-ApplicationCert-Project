@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>24X7</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <!-- For DataTables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+  <style>
+    .footer {
+       position: fixed;
+       left: 0;
+       bottom: 0;
+       width: 100%;
+       background-color: rgb(15, 16, 24);
+       color: white;
+       text-align: center;
+    }
+
+
+    .open-button {
+  background-color: rgb(42, 34, 75);
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
+
+/* The popup chat - hidden by default */
+.chat-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width textarea */
+.form-container textarea {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  resize: none;
+  min-height: 200px;
+}
+
+/* When the textarea gets focus, do something */
+.form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/send button */
+.form-container .btn {
+  color: white;
+  padding: 8px 8px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: rgb(98, 0, 255);
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+#usernameimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+    </style>
+</head>
+<body style="background-color: rgb(94, 93, 77);">
+
+
+<div id="socketusername">
+  <img id="usernameimage" height="mx-auto" width="850px"src="https://i.pinimg.com/originals/b9/68/93/b968930b8761d97cda2f062e0f071ade.jpg"/>
+  <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="d-flex justify-content-center">
+              <input id="username" type="text" placeholder="Please type your username"/>
+              <button class="btn btn-primary" id="usernamesubmit">Sign In</button>
+            </div>
+            <div> 
+              <p id="invalidusername" class="text-center" style="color:rgb(97, 21, 21);"></p>
+            </div>
+        </div>
+        
+        <div class="col-md-2">
+        </div>
+  </div>
+</div>
+
+
+
+
+
+<div id="myhomepage">
+        <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #071c2b;">
+            <a class="navbar-brand" href="#">24x7 Live Customer news</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                aria-expanded="false" aria-label="Toggle navigation"></button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Homepage 
+                          <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contactus/">Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sports/">Sports</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="/aboutus/">About us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    <div class="container">
+                <div id="Weatherreport">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8 text-center">    
+                            <button type="button" id="getweatherreport" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                Get weather report of my location
+                              </button>
+                              
+                              <!-- Modal -->
+                              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Weather</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body"  style="background-color: rgb(118, 167, 126);">
+                                                <div class="container">
+                                                    <div class="row">
+                                                            <div class="col-md-4">
+                                                                <label>
+                                                                    <b>
+                                                                        Area name:
+                                                                    </b>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-8" id="area">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4"> 
+                                                                <label>
+                                                                        <b>
+                                                                        Temperature:
+                                                                        </b>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-8" id="temperature">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">                                      
+                                                                <label>
+                                                                    <b>
+                                                                    Humidity:
+                                                                    </b>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-8" id="humidity"> 
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4">                                      
+                                                                <label>
+                                                                    <b>
+                                                                    pressure:
+                                                                    </b>
+                                                                </label>
+                                                            </div>
+                                                            <div class="col-md-8" id="pressure">
+                                                            </div>
+                                                        </div>
+                                                </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
+                    <div>
+                        <p class="text-center"></p>
+                    </div>
+                </div>
+        </div>
+
+        <div class="container" style="height: 200px;">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <%if(details!='nodata'){%>
+                    <%for(var i=0;i<details.length;i++){%>
+                        <%if(i==0){%>
+                        <div class="carousel-item active">
+                        <%}else{%>
+                        <div class="carousel-item">
+                        <%}%>
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                        <img src="<%= details[i].imageurl%>" style="width: 900px;height: 400px;" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                        <h2 style="color: black;"><b><%=details[i].title%></b></h2>
+                                        <p style="color: black;"><b><%=details[i].description%></b></p>
+                                        </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    <%}%>
+                    <%}else{%>
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                        <img src="https://i.pinimg.com/originals/c9/22/68/c92268d92cf2dbf96e3195683d9e14fb.png" style="width: 900px;height: 400px;" alt="...">
+                                        <div class="carousel-caption d-none d-md-block">
+                                        <p style="color: black;"><b>No News has been updated by 24X7</b></p>
+                                        </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                    <%}%>
+                    
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+        </div>
+
+        <button class="open-button" onclick="openForm()"><b>Chat with anonymous</b></button>
+
+        <div class="chat-popup" id="myForm">
+          <form class="form-container" id="messageform">
+            <h1>Chat</h1>
+        
+            <label for="msg"><b>Message</b></label>
+            <!-- Insert all messages here -->
+            <div id="" class="usernameajax" style="width:100%; height:250px; background-color: rgb(171, 229, 231); overflow-y: scroll;">
+
+            </div>
+            <input id="mymessage" placeholder="Type your message here.." name="msg" required>
+            <button type="button" class="btn btn-danger" onclick="closeForm()">Close</button>
+        </form>
+        </div>
+
+
+
+        <div class="footer">
+            <p>24X7 &#169;	all copyrights are registered</p>
+          </div>
+
+
+</div>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+    <script>
+            function openForm() {
+              document.getElementById("myForm").style.display = "block";
+            }
+            
+            function closeForm() {
+              document.getElementById("myForm").style.display = "none";
+            }
+    </script>
+
+<!-- ****This below should be used inorder to access socket io from external JS or Ajax file** -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="../js/socket.js"></script>
+    <script type="text/javascript" src="../js/getweatherreportajax.js"></script>
+</body>
+</html>
