@@ -3,7 +3,7 @@ const router = express.Router();
 const chalk = require("chalk");
 const sgMail = require("@sendgrid/mail");
 const bodyparser = require("body-parser");
-sgMail.setApiKey("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");
+sgMail.setApiKey("SG.KUd4Am-6SEmSZrRAvud-Lw.GY9dkLKB232f4qEAEdraLCSqDu-j-jVAOV9YYrG9a2E");
 
 router.use(bodyparser.urlencoded({extended:true}))
 
@@ -21,7 +21,7 @@ router.post("/sendemail",(req,res)=>{
     var emailbody = req.body.emailbody;
     var message={
                  to: toemail,
-                from:"balu.shiva234@gmail.com",
+                from:"tpdawnsun@gmail.com",
                 subject:"Imp email from 24X7",
                 text: emailbody
                             }
